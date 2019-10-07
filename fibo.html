@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="http://code.jquery.com/jquery-2.1.3.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.11.3/jquery-ui.min.js"></script>
+    <title>Fibonacci</title>
+</head>
+<body>
+    <style>
+    h1{
+        display: table-cell;
+        font-size: 100px;
+        box-shadow: 0 0 0 6px black;
+    }
+    </style>
+    <script>
+function drawFibonacci(n){
+    function fibonacci(n){
+        if(n==0){return 0}
+        let fiboNum = [0,1];
+        for (let i=1; fiboNum.length<=n; i++){
+            fiboNum.push(fiboNum[i] + fiboNum[i-1])
+        };
+        return fiboNum.pop();
+    };
+
+    function fib(n,vetka,id){
+        if(vetka=='master'){
+            $('body').append(`<h1 id="${id}">${fibonacci(n)}</h1>`)
+            id=0;
+            $(`#${id}`).css({
+                'background-color':'white'
+                });
+        }else if(vetka=='left'){
+            $(`#${id}`).append(`<h1 id="${id}1">${fibonacci(n)}</h1>`)
+            id=id+'1';
+            $(`#${id}`).css({
+                'background-color':'red'
+                });
+        }else{
+            $(`#${id}`).append(`<h1 id="${id}2">${fibonacci(n)}</h1>`)
+            id=id+'2'
+            $(`#${id}`).css({
+                'background-color':'green'
+                });
+        }
+        // console.log(id + "__" + n)
+        // $(`#${n}`).append($(`<h1 id="${n-1}">${n-1}</h1>`))
+        return n<=1 ? n : fib(n-1,'left',id) + fib(n-2,'right',id);
+    }
+    return fib(n,'master',0);
+    // console.log("result" + fib(n,'master',0));
+}
+    </script>
+</body>
+</html>
