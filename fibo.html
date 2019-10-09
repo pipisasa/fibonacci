@@ -9,14 +9,41 @@
     <title>Fibonacci</title>
 </head>
 <body>
+    <div class="input_box">
+        <input class="input">
+        <button class="btn">Check</button>
+        <h2 style="font-size: 3vh">function fib(n){ n<=1 ? return n : fib(n-1) + fib(n-2)};</h2>
+    </div>
+
     <style>
+    h2{
+        font-size: 3vh;
+        margin: 0 0% 0 5%;
+    }
+    .input_box{
+        display: flex;
+        width: 100%;
+    }
+    body{
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+    }
     h1{
         display: table-cell;
-        font-size: 100px;
-        box-shadow: 0 0 0 6px black;
+        font-size: 3vh;
+        box-shadow: 0 0 0 0.3vh black;
     }
     </style>
     <script>
+        let input = $('.input');
+        $('.btn').on('click', function(){
+            $("h1").detach();
+            if(input.val()<=0 || input.val()>14 || isNaN(+input.val())){
+                return;
+            }
+            drawFibonacci(input.val());
+        })
 function drawFibonacci(n){
     function fibonacci(n){
         if(n==0){return 0}
